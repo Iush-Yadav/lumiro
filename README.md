@@ -9,8 +9,6 @@ npm install
 npm run dev
 ```
 
-Open http://localhost:3000.
-
 ## Stack
 
 - **Next.js 14** (App Router) + TypeScript
