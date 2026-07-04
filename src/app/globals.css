@@ -1,0 +1,131 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --accent: 181 83 46; /* clay */
+    --ink: 28 24 21;
+    --header-h: 4.5rem;
+  }
+
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: var(--header-h);
+  }
+
+  body {
+    @apply bg-paper text-ink font-body antialiased;
+    text-rendering: optimizeLegibility;
+    letter-spacing: -0.006em;
+  }
+
+  h1, h2, h3 {
+    font-feature-settings: 'liga' 1, 'dlig' 1;
+  }
+
+  /* Soft, clean paper base — a whisper of warmth, no grain or glow */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    pointer-events: none;
+    background:
+      radial-gradient(120% 80% at 50% -10%, rgba(181, 83, 46, 0.04), transparent 55%),
+      #f7f4ee;
+  }
+
+  ::selection {
+    @apply bg-ink text-paper;
+  }
+
+  :focus-visible {
+    outline: 2px solid rgb(var(--accent));
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  /* Refined light scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #ece7dc;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(28, 24, 21, 0.18);
+    border-radius: 999px;
+    border: 3px solid #ece7dc;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(28, 24, 21, 0.32);
+  }
+}
+
+@layer components {
+  .section-label {
+    @apply inline-flex items-center gap-2 text-[0.7rem] font-medium uppercase tracking-luxe text-clay;
+  }
+  .section-label::before {
+    content: '';
+    @apply h-px w-6 bg-clay/50;
+  }
+
+  /* Clean light card — hairline border + soft neutral lift, no blur/glow */
+  .glass-card {
+    background: #ffffff;
+    border: 1px solid rgba(28, 24, 21, 0.08);
+    box-shadow: 0 1px 2px rgba(28, 24, 21, 0.04), 0 18px 44px -32px rgba(28, 24, 21, 0.35);
+  }
+  .glass-card:where(.interactive):hover {
+    border-color: rgba(28, 24, 21, 0.14);
+    box-shadow: 0 2px 4px rgba(28, 24, 21, 0.05), 0 26px 56px -30px rgba(28, 24, 21, 0.4);
+  }
+
+  .input-field {
+    @apply w-full rounded-xl border border-ink/10 bg-white px-4 py-3 text-sm text-ink outline-none transition-colors duration-300 placeholder:text-ink/40 focus:border-clay focus:bg-white;
+  }
+
+  .hairline {
+    @apply border-ink/10;
+  }
+}
+
+@layer utilities {
+  .fill-noise {
+    position: relative;
+  }
+
+  /* Signature headline emphasis — solid, editorial (no gradient) */
+  .text-gilded {
+    @apply text-clay;
+  }
+
+  /* Legacy hook kept as a no-op so overlay text classes still resolve */
+  .text-shadow-glow {
+    text-shadow: none;
+  }
+
+  .mask-fade-x {
+    -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
